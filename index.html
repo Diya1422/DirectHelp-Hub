@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DirectHelp Hub - Personal Support & Guidance Platform</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-mode" id="body">
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <i class="fas fa-hands-helping"></i> DirectHelp <span>Hub</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li class="has-dropdown">
+          <a href="#services" class="nav-link dropdown-toggle">
+            Services <i class="fas fa-chevron-down"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#request" data-cat="Career Guidance"><i class="fas fa-briefcase"></i> Career Guidance</a></li>
+            <li><a href="#request" data-cat="Health Guidance"><i class="fas fa-heartbeat"></i> Health Guidance</a></li>
+            <li><a href="#request" data-cat="Study Resources"><i class="fas fa-book"></i> Study Resources</a></li>
+            <li><a href="#request" data-cat="Notes"><i class="fas fa-sticky-note"></i> Notes</a></li>
+            <li><a href="#request" data-cat="Suggestions"><i class="fas fa-lightbulb"></i> Suggestions</a></li>
+            <li><a href="#request" data-cat="YouTube Links"><i class="fab fa-youtube"></i> YouTube Links</a></li>
+            <li><a href="#request" data-cat="Motivation"><i class="fas fa-fire"></i> Motivation</a></li>
+            <li><a href="#request" data-cat="Other Help"><i class="fas fa-question-circle"></i> Other Help</a></li>
+          </ul>
+        </li>
+        <li><a href="#request" class="nav-link">Request Help</a></li>
+        <li><a href="#resources" class="nav-link">Resources</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="admin.html" class="btn-admin"><i class="fas fa-shield-alt"></i> Admin</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-bg">
+      <div class="circle c1"></div>
+      <div class="circle c2"></div>
+      <div class="circle c3"></div>
+    </div>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge"><i class="fas fa-star"></i> Trusted Personal Guidance - Direct via WhatsApp</div>
+        <h1>Your Personal <span class="gradient-text">Support & Guidance</span> Platform</h1>
+        <p>Get personalized career advice, study resources, health guidance, motivation, and more - delivered directly via WhatsApp by a real person, not a bot.</p>
+        <div class="hero-btns">
+          <a href="#request" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Get Help Now</a>
+          <a href="#services" class="btn btn-outline"><i class="fas fa-th-large"></i> Explore Services</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">500+</span><span class="stat-lbl">Users Helped</span></div>
+          <div class="stat"><span class="stat-num">8</span><span class="stat-lbl">Categories</span></div>
+          <div class="stat"><span class="stat-num">24h</span><span class="stat-lbl">Response Time</span></div>
+        </div>
+      </div>
+      <div class="hero-cards">
+        <div class="hcard glass-card floating"><i class="fab fa-whatsapp fa-2x"></i><p>Direct WhatsApp Chat</p></div>
+        <div class="hcard glass-card floating" style="animation-delay:.8s"><i class="fas fa-user-graduate fa-2x"></i><p>Expert Guidance</p></div>
+        <div class="hcard glass-card floating" style="animation-delay:1.6s"><i class="fas fa-lock fa-2x"></i><p>100% Private</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">What We Offer</span>
+        <h2>Our <span class="gradient-text">Services</span></h2>
+        <p>Choose a category and submit your request - help arrives on WhatsApp</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card glass-card" onclick="selectCategory('Career Guidance')">
+          <div class="svc-icon" style="background:linear-gradient(135deg,#667eea,#764ba2)"><i class="fas fa-briefcase"></i></div>
+          <h3>Career Guidance</h3>
+          <p>Resume building, interview prep, job search strategy, and career planning.</p>
+          <a href="#request" class="svc-link">Get Help <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card glass-card" onclick="selectCategory('Health Guidance')">
+          <div class="svc-icon" style="background:linear-gradient(135deg,#f093fb,#f5576c)"><i class="fas fa-heartbeat"></i></div>
+          <h3>Health Guidance</h3>
+          <p>Wellness tips, mental health support, and healthy lifestyle suggestions.</p>
+          <a href="#request" class="svc-link">Get Help <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card glass-card" onclick="selectCategory('Study Resources')">
+          <div class="svc-icon" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"><i class="fas fa-book"></i></div>
+          <h3>Study Resources</h3>
+          <p>Curated study materials, references, and guides for any subject.</p>
+          <a href="#request" class="svc-link">Get Help <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card glass-card" onclick="selectCategory('Notes')">
+          <div class="svc-icon" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"><i class="fas fa-sticky-note"></i></div>
+          <h3>Notes</h3>
+          <p>Detailed notes, summaries, cheat sheets, and concept explanations.</p>
+          <a href="#request" class="svc-link">Get Help <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card glass-card" onclick="selectCategory('Suggestions')">
+          <div class="svc-icon" style="background:linear-gradient(135deg,#fa709a,#fee140)"><i class="fas fa-lightbulb"></i></div>
+          <h3>Suggestions</h3>
+          <p>Personalized tool, book, course, and resource recommendations.</p>
+          <a href="#request" class="svc-link">Get Help <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card glass-card" onclick="selectCategory('YouTube Links')">
+          <div class="svc-icon" style="background:linear-gradient(135deg,#ff0000,#ff6b6b)"><i class="fab fa-youtube"></i></div>
+          <h3>YouTube Links</h3>
+          <p>Handpicked YouTube tutorials, lectures, and video playlists.</p>
+          <a href="#request" class="svc-link">Get Help <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card glass-card" onclick="selectCategory('Motivation')">
+          <div class="svc-icon" style="background:linear-gradient(135deg,#f7971e,#ffd200)"><i class="fas fa-fire"></i></div>
+          <h3>Motivation</h3>
+          <p>Daily motivation, mindset coaching, and goal-setting support.</p>
+          <a href="#request" class="svc-link">Get Help <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card glass-card" onclick="selectCategory('Other Help')">
+          <div class="svc-icon" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)"><i class="fas fa-question-circle"></i></div>
+          <h3>Other Help</h3>
+          <p>Can't find your category? Describe your need and we'll help.</p>
+          <a href="#request" class="svc-link">Get Help <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Simple Process</span>
+        <h2>How It <span class="gradient-text">Works</span></h2>
+        <p>Get personalized help in 3 easy steps</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card glass-card">
+          <div class="step-num">01</div>
+          <div class="step-icon"><i class="fas fa-edit"></i></div>
+          <h3>Fill the Form</h3>
+          <p>Choose your category and describe your request in the form below.</p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+        <div class="step-card glass-card">
+          <div class="step-num">02</div>
+          <div class="step-icon"><i class="fab fa-whatsapp"></i></div>
+          <h3>Auto WhatsApp Send</h3>
+          <p>Your request is formatted and sent directly to the admin's WhatsApp.</p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+        <div class="step-card glass-card">
+          <div class="step-num">03</div>
+          <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+          <h3>Receive Guidance</h3>
+          <p>The admin contacts you personally on WhatsApp with tailored help.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Request Form -->
+  <section id="request" class="section request-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Get Support</span>
+        <h2>Request <span class="gradient-text">Help Now</span></h2>
+        <p>Your request goes directly to our admin's WhatsApp</p>
+      </div>
+      <div class="form-layout">
+        <div class="form-card glass-card">
+          <form id="helpForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName"><i class="fas fa-user"></i> Full Name <span class="req">*</span></label>
+                <input type="text" id="fullName" name="name" placeholder="Your full name" required>
+                <span class="err" id="nameErr"></span>
+              </div>
+              <div class="form-group">
+                <label for="whatsappNum"><i class="fab fa-whatsapp"></i> WhatsApp Number <span class="req">*</span></label>
+                <input type="tel" id="whatsappNum" name="whatsapp" placeholder="+91 98765 43210" required>
+                <span class="err" id="waErr"></span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="emailAddr"><i class="fas fa-envelope"></i> Email <span class="opt">(Optional)</span></label>
+                <input type="email" id="emailAddr" name="email" placeholder="your@email.com">
+                <span class="err" id="emailErr"></span>
+              </div>
+              <div class="form-group">
+                <label for="category"><i class="fas fa-tags"></i> Category <span class="req">*</span></label>
+                <select id="category" name="category" required>
+                  <option value="">-- Select Category --</option>
+                  <option value="Career Guidance">Career Guidance</option>
+                  <option value="Health Guidance">Health Guidance</option>
+                  <option value="Study Resources">Study Resources</option>
+                  <option value="Notes">Notes</option>
+                  <option value="Suggestions">Suggestions</option>
+                  <option value="YouTube Links">YouTube Links</option>
+                  <option value="Motivation">Motivation</option>
+                  <option value="Other Help">Other Help</option>
+                </select>
+                <span class="err" id="catErr"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message"><i class="fas fa-comment-alt"></i> Message / Request <span class="req">*</span></label>
+              <textarea id="message" name="message" placeholder="Describe your request in detail..." required rows="5"></textarea>
+              <div class="char-count"><span id="charCount">0</span> / 500</div>
+              <span class="err" id="msgErr"></span>
+            </div>
+            <div class="form-footer">
+              <p class="privacy-note"><i class="fas fa-lock"></i> Your info is private and only used to assist you.</p>
+              <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                <i class="fab fa-whatsapp"></i> Send via WhatsApp
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="form-sidebar">
+          <div class="info-card glass-card"><i class="fas fa-bolt"></i><h4>Quick Response</h4><p>Within 24 hours</p></div>
+          <div class="info-card glass-card"><i class="fas fa-user-shield"></i><h4>Confidential</h4><p>Your data stays private</p></div>
+          <div class="info-card glass-card"><i class="fas fa-heart"></i><h4>Personalized</h4><p>Tailored to your need</p></div>
+          <div class="info-card glass-card"><i class="fab fa-whatsapp"></i><h4>Real Person</h4><p>Not a bot - direct chat</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal glass-card">
+      <div class="modal-icon"><i class="fas fa-check-circle"></i></div>
+      <h3>Request Sent!</h3>
+      <p>Your request is on its way to WhatsApp. Our admin will reach you personally within 24 hours.</p>
+      <button class="btn btn-primary" onclick="closeModal()">Got it!</button>
+    </div>
+  </div>
+
+  <!-- Resource Library -->
+  <section id="resources" class="section resources-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Knowledge Base</span>
+        <h2>Resource <span class="gradient-text">Library</span></h2>
+        <p>Browse our curated collection of helpful resources</p>
+      </div>
+      <div class="search-bar-wrap">
+        <i class="fas fa-search"></i>
+        <input type="text" id="resourceSearch" placeholder="Search resources (e.g. resume, DSA, motivation...)">
+      </div>
+      <div class="resources-grid" id="resourcesGrid">
+        <div class="res-card glass-card" data-tags="career resume interview job">
+          <span class="res-tag" style="background:linear-gradient(135deg,#667eea,#764ba2)">Career</span>
+          <h4>How to Build an ATS-Friendly Resume</h4>
+          <p>Tips and templates for creating a resume that passes applicant tracking systems and lands interviews.</p>
+          <a href="#request" class="res-link" onclick="selectCategory('Career Guidance')">Request Details <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="res-card glass-card" data-tags="study dsa algorithms data structures coding">
+          <span class="res-tag" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">Study</span>
+          <h4>DSA Roadmap for Beginners</h4>
+          <p>A step-by-step guide to learning Data Structures and Algorithms for coding interviews and projects.</p>
+          <a href="#request" class="res-link" onclick="selectCategory('Study Resources')">Request Details <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="res-card glass-card" data-tags="motivation consistency habits productivity mindset">
+          <span class="res-tag" style="background:linear-gradient(135deg,#f7971e,#ffd200)">Motivation</span>
+          <h4>Staying Consistent When Learning Is Hard</h4>
+          <p>Practical mindset strategies to maintain study consistency and avoid burnout over long periods.</p>
+          <a href="#request" class="res-link" onclick="selectCategory('Motivation')">Request Details <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="res-card glass-card" data-tags="health mental wellness stress anxiety students">
+          <span class="res-tag" style="background:linear-gradient(135deg,#f093fb,#f5576c)">Health</span>
+          <h4>Mental Wellness for Students</h4>
+          <p>Managing stress, anxiety, and maintaining mental health during exams and career transitions.</p>
+          <a href="#request" class="res-link" onclick="selectCategory('Health Guidance')">Request Details <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="res-card glass-card" data-tags="youtube channels programming tutorials learning video">
+          <span class="res-tag" style="background:linear-gradient(135deg,#ff0000,#ff6b6b)">YouTube</span>
+          <h4>Top YouTube Channels for Developers</h4>
+          <p>Curated list of the best channels for web development, DSA, Java, React, system design and more.</p>
+          <a href="#request" class="res-link" onclick="selectCategory('YouTube Links')">Request Details <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="res-card glass-card" data-tags="notes java oop concepts classes objects programming">
+          <span class="res-tag" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">Notes</span>
+          <h4>Java OOP Concepts - Quick Reference</h4>
+          <p>Concise notes on Classes, Objects, Inheritance, Polymorphism, Encapsulation, and Abstraction.</p>
+          <a href="#request" class="res-link" onclick="selectCategory('Notes')">Request Details <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Real Feedback</span>
+        <h2>Success <span class="gradient-text">Stories</span></h2>
+        <p>People who got help through DirectHelp Hub</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="tcard glass-card">
+          <div class="quote"><i class="fas fa-quote-left"></i></div>
+          <p>"I found the health and motivation resources very useful. The platform provides easy-to-understand guidance that helps in daily life."</p>
+          <div class="tauthor">
+            <div class="avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">P</div>
+            <div><h5>Bindiya Sharma</h5><span>HomeMaker, Mumbai</span></div>
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          </div>
+        </div>
+        <div class="tcard glass-card">
+          <div class="quote"><i class="fas fa-quote-left"></i></div>
+          <p>"I wanted to move into the IT field but didn't know where to start. The career roadmaps and learning resources helped me identify the right skills and build a clear plan."</p>
+          <div class="tauthor">
+            <div class="avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">R</div>
+            <div><h5>Mithilesh Sharma</h5><span>Career Switch Aspirant, Banglore</span></div>
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          </div>
+        </div>
+        <div class="tcard glass-card">
+          <div class="quote"><i class="fas fa-quote-left"></i></div>
+          <p>"The career guidance section helped me understand modern digital skills and online opportunities. The recommendations were practical and easy to follow."</p>
+          <div class="tauthor">
+            <div class="avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">A</div>
+            <div><h5>Vinod Sharma</h5><span>Business Owner, USA</span></div>
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          </div>
+        </div>
+        <div class="tcard glass-card">
+          <div class="quote"><i class="fas fa-quote-left"></i></div>
+          <p>"The curated YouTube channel recommendations saved me hours of searching.I discovered excellent Java,DSA,and Web Development resources that helped me improve my technical skills and stay updated with industry trends."</p>
+          <div class="tauthor">
+            <div class="avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">A</div>
+            <div><h5>Ankit Raj</h5><span>Software Developer, Banglore</span></div>
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          </div>
+        </div>
+        <div class="tcard glass-card">
+          <div class="quote"><i class="fas fa-quote-left"></i></div>
+          <p>"The career resources helped me explore different paths after school. The guidance gave me confidence in choosing the right skills for my future."</p>
+          <div class="tauthor">
+            <div class="avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">R</div>
+            <div><h5>Shivam Kumar</h5><span>Class-12 Student, Delhi</span></div>
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          </div>
+        </div>
+        <div class="tcard glass-card">
+          <div class="quote"><i class="fas fa-quote-left"></i></div>
+          <p>"The study roadmaps and quick-reference notes made learning much easier. I was able to revise important concepts faster and stay consistent with my studies."</p>
+          <div class="tauthor">
+            <div class="avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">R</div>
+            <div><h5>Shubham Kumar</h5><span>Class-9 Student, Pune</span></div>
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section faq-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Got Questions?</span>
+        <h2>Frequently Asked <span class="gradient-text">Questions</span></h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item glass-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>How does DirectHelp Hub work?</h4><i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            <p>Fill out the request form with your name, WhatsApp number, category, and request details. On submit, your request is formatted and sent to the admin's WhatsApp. The admin then contacts you personally to provide tailored guidance.</p>
+          </div>
+        </div>
+        <div class="faq-item glass-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Is this service free?</h4><i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            <p>Yes! DirectHelp Hub provides free support and guidance. Our mission is to make quality guidance accessible to everyone, especially students and early-career professionals.</p>
+          </div>
+        </div>
+        <div class="faq-item glass-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>How long does it take to get a response?</h4><i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            <p>Our admin typically responds within 24 hours. For urgent requests, mention "URGENT" in your message. Response times may vary with request volume.</p>
+          </div>
+        </div>
+        <div class="faq-item glass-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Is my information kept private?</h4><i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            <p>Absolutely. Your personal information is only used to provide the requested guidance. We do not share your data with third parties.</p>
+          </div>
+        </div>
+        <div class="faq-item glass-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>What if my question doesn't fit any category?</h4><i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            <p>Select "Other Help" from the category dropdown. Our admin handles a wide range of requests, so don't hesitate to ask even if it seems unusual.</p>
+          </div>
+        </div>
+        <div class="faq-item glass-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Can I submit multiple requests?</h4><i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            <p>Yes, you can submit as many requests as you need. Provide detailed information in each to help us give you the most accurate and useful response.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Reach Out</span>
+        <h2>Get in <span class="gradient-text">Touch</span></h2>
+        <p>Questions about the platform? We'd love to hear from you.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card glass-card">
+          <i class="fab fa-whatsapp"></i>
+          <h4>WhatsApp</h4>
+          <p>Send a request and chat directly with our admin on WhatsApp</p>
+          <a href="#request" class="clink">Send a Request</a>
+        </div>
+        <div class="contact-card glass-card">
+          <i class="fas fa-envelope"></i>
+          <h4>Email</h4>
+          <p>Reach out via email for platform feedback and inquiries</p>
+          <a href="mailto:diya.katihar@gmail.com" class="clink">diya.katihar@gmail.com</a>
+        </div>
+        <div class="contact-card glass-card">
+          <i class="fas fa-clock"></i>
+          <h4>Availability</h4>
+          <p>Our admin is available to respond to your requests</p>
+          <span class="clink">Mon - Sat, 9 AM - 9 PM IST</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo"><i class="fas fa-hands-helping"></i> DirectHelp <span>Hub</span></a>
+          <p>Your personal support and guidance platform. Connecting people with personalized help through WhatsApp.</p>
+          <div class="social-links">
+            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/diya-sharma-0087ab241/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.youtube.com/@diyasharma6035" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#request">Request Help</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Categories</h5>
+          <ul>
+            <li><a href="#request" onclick="selectCategory('Career Guidance')">Career Guidance</a></li>
+            <li><a href="#request" onclick="selectCategory('Study Resources')">Study Resources</a></li>
+            <li><a href="#request" onclick="selectCategory('Health Guidance')">Health Guidance</a></li>
+            <li><a href="#request" onclick="selectCategory('Notes')">Notes</a></li>
+            <li><a href="#request" onclick="selectCategory('Motivation')">Motivation</a></li>
+            <li><a href="#request" onclick="selectCategory('Other Help')">Other Help</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Admin</h5>
+          <ul>
+            <li><a href="admin.html">Admin Panel</a></li>
+            <li><a href="admin.html">View Requests</a></li>
+            <li><a href="admin.html">Export Data</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 DirectHelp Hub. All rights reserved.</p>
+        <p>Built with <i class="fas fa-heart" style="color:#f5576c"></i> for students and professionals</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="#request" class="floating-wa" title="Get Help Now"><i class="fab fa-whatsapp"></i></a>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTop" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
