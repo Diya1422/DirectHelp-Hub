@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - DirectHelp Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .controls { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem; align-items:center; }
+    .search-input {
+      flex:1; min-width:200px;
+      background:var(--glass); border:1px solid var(--border);
+      border-radius:var(--radius-sm); padding:.65rem 1rem;
+      color:var(--text); font-size:.9rem; outline:none;
+    }
+    .search-input:focus { border-color:var(--primary); }
+    .filter-select {
+      background:var(--glass); border:1px solid var(--border);
+      border-radius:var(--radius-sm); padding:.65rem 1rem;
+      color:var(--text); font-size:.9rem; outline:none; cursor:pointer;
+    }
+    .filter-select option { background:var(--bg2); }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:.88rem; }
+    th {
+      text-align:left; padding:.85rem 1rem;
+      background:var(--glass); color:var(--text2); font-weight:600;
+      border-bottom:1px solid var(--border); white-space:nowrap;
+    }
+    td { padding:.85rem 1rem; border-bottom:1px solid var(--border); vertical-align:top; }
+    tr:hover td { background:rgba(108,99,255,.05); }
+    .badge {
+      display:inline-block; padding:.25rem .7rem;
+      border-radius:50px; font-size:.75rem; font-weight:700;
+    }
+    .badge-career  { background:rgba(108,99,255,.2); color:#8B83FF; }
+    .badge-health  { background:rgba(245,87,108,.2); color:#f5576c; }
+    .badge-study   { background:rgba(79,172,254,.2); color:#4facfe; }
+    .badge-notes   { background:rgba(67,233,123,.2); color:#43e97b; }
+    .badge-suggest { background:rgba(247,151,30,.2); color:#f7971e; }
+    .badge-youtube { background:rgba(255,0,0,.2); color:#ff6b6b; }
+    .badge-motiv   { background:rgba(255,210,0,.2); color:#ffd200; }
+    .badge-other   { background:rgba(161,140,209,.2); color:#a18cd1; }
+    .btn-del {
+      background:rgba(245,87,108,.15); border:1px solid rgba(245,87,108,.3);
+      color:var(--danger); border-radius:var(--radius-sm);
+      padding:.35rem .75rem; font-size:.8rem; cursor:pointer; transition:all .2s;
+    }
+    .btn-del:hover { background:var(--danger); color:#fff; }
+    .msg-col { max-width:280px; word-break:break-word; color:var(--text2); }
+    .no-data {
+      text-align:center; padding:4rem 2rem; color:var(--text2);
+    }
+    .no-data i { font-size:3rem; margin-bottom:1rem; display:block; opacity:.3; }
+    .server-warning {
+      background:rgba(255,210,0,.1); border:1px solid rgba(255,210,0,.3);
+      border-radius:var(--radius-sm); padding:1rem 1.25rem;
+      font-size:.88rem; color:var(--warning); margin-bottom:1.5rem;
+      display:none; align-items:center; gap:.75rem;
+    }
+    .server-warning.show { display:flex; }
+    .export-btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.65rem 1.25rem; background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:#fff; border:none; border-radius:var(--radius-sm);
+      font-size:.88rem; font-weight:600; cursor:pointer; transition:all .2s;
+    }
+    .export-btn:hover { opacity:.9; transform:translateY(-1px); }
+    .refresh-btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.65rem 1rem; background:var(--glass);
+      border:1px solid var(--border); color:var(--text2);
+      border-radius:var(--radius-sm); font-size:.88rem; cursor:pointer; transition:all .2s;
+    }
+    .refresh-btn:hover { border-color:var(--primary); color:var(--primary); }
+    .loading { text-align:center; padding:3rem; color:var(--text2); }
+    .loading i { font-size:2rem; animation:spin 1s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .logout-btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.45rem 1rem; background:rgba(245,87,108,.15);
+      border:1px solid rgba(245,87,108,.3); color:var(--danger);
+      border-radius:50px; font-size:.85rem; font-weight:600; cursor:pointer; transition:all .2s;
+    }
+    .logout-btn:hover { background:var(--danger); color:#fff; }
+  </style>
+</head>
+<body class="dark-mode" id="body">
+<script>
+if(sessionStorage.getItem("adminLoggedIn") !== "true"){
+    window.location.href = "admin-login.html";
+}
+</script>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-hands-helping"></i> DirectHelp <span>Hub</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" class="nav-link" style="color:var(--primary)"><i class="fas fa-shield-alt"></i> Admin Panel</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon" id="themeIcon"></i></button>
+        <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i>Logout</button>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="admin-page">
+
+    <div class="admin-hero">
+      <div class="container">
+        <h1><i class="fas fa-shield-alt" style="color:var(--primary)"></i> Admin Panel</h1>
+        <p>Manage all help requests from DirectHelp Hub</p>
+      </div>
+    </div>
+
+    <div class="admin-main">
+      <div class="container">
+
+        <!-- Stats -->
+        <div class="stats-row" id="statsRow">
+          <div class="stat-card glass-card">
+            <i class="fas fa-inbox" style="color:var(--primary)"></i>
+            <div class="stat-info">
+              <span class="stat-val" id="statTotal">0</span>
+              <span class="stat-lbl">Total Requests</span>
+            </div>
+          </div>
+          <div class="stat-card glass-card">
+            <i class="fas fa-calendar-day" style="color:var(--accent)"></i>
+            <div class="stat-info">
+              <span class="stat-val" id="statToday">0</span>
+              <span class="stat-lbl">Today</span>
+            </div>
+          </div>
+          <div class="stat-card glass-card">
+            <i class="fas fa-briefcase" style="color:var(--secondary)"></i>
+            <div class="stat-info">
+              <span class="stat-val" id="statCareer">0</span>
+              <span class="stat-lbl">Career Requests</span>
+            </div>
+          </div>
+          <div class="stat-card glass-card">
+            <i class="fas fa-book" style="color:var(--success)"></i>
+            <div class="stat-info">
+              <span class="stat-val" id="statStudy">0</span>
+              <span class="stat-lbl">Study Requests</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Server warning -->
+        <div class="server-warning" id="serverWarn">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>Java server is not running. Start the server with <code>run.bat</code> to see stored requests.</span>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+          <input type="text" class="search-input" id="searchInput" placeholder="Search by name, category, or message...">
+          <select class="filter-select" id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="Career Guidance">Career Guidance</option>
+            <option value="Health Guidance">Health Guidance</option>
+            <option value="Study Resources">Study Resources</option>
+            <option value="Notes">Notes</option>
+            <option value="Suggestions">Suggestions</option>
+            <option value="YouTube Links">YouTube Links</option>
+            <option value="Motivation">Motivation</option>
+            <option value="Other Help">Other Help</option>
+          </select>
+          <button class="refresh-btn" onclick="loadRequests()"><i class="fas fa-sync-alt"></i> Refresh</button>
+          <button class="export-btn" onclick="exportRequests()"><i class="fas fa-download"></i> Export JSON</button>
+        </div>
+
+        <!-- Table -->
+        <div class="glass-card table-wrap">
+          <div class="loading" id="loadingState"><i class="fas fa-spinner"></i><p style="margin-top:.75rem">Loading requests...</p></div>
+          <div id="tableContainer" style="display:none">
+            <table id="requestsTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>WhatsApp</th>
+                  <th>Email</th>
+                  <th>Category</th>
+                  <th>Message</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+            <div class="no-data" id="noData" style="display:none">
+              <i class="fas fa-inbox"></i>
+              <p>No requests found.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal glass-card">
+      <div class="modal-icon" style="color:var(--danger)"><i class="fas fa-trash-alt"></i></div>
+      <h3>Delete Request?</h3>
+      <p>This action cannot be undone. The request will be permanently removed.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;margin-top:1rem">
+        <button class="btn btn-outline" onclick="closeDeleteModal()">Cancel</button>
+        <button class="btn btn-primary" style="background:linear-gradient(135deg,var(--danger),#ff6b6b)" onclick="confirmDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+  <script>
+  function logout(){
+    sessionStorage.removeItem("adminLoggedIn");
+    window.location.href = "admin-login.html";
+  }
+  </script>
+  </body>
+  </html>
