@@ -3,7 +3,7 @@ type: project
 created: 2026-06-15
 updated: 2026-06-15
 tags: [project, portfolio, java, html, css, javascript, whatsapp]
-status: building
+status: done
 ---
 
 # DirectHelp Hub
@@ -12,8 +12,8 @@ A personal support and guidance platform where users request help (career, study
 
 ## Live Demo
 
-- Frontend: open `frontend/index.html` directly in a browser (WhatsApp works without the server)
-- Full stack: run `run.bat` then open `http://localhost:8080`
+- **Live site:** https://diya1422.github.io/DirectHelp-Hub/
+- Local full stack: run `run.bat` then open `http://localhost:9090`
 
 ## Setup
 
