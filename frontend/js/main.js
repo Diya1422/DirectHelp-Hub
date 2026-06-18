@@ -132,17 +132,18 @@ function initForm() {
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-    // Try saving to Java backend (optional - works without server)
+    // Save to localStorage (always works, no server needed)
+    saveToLocalStorage(data);
+
+    // Also try Java backend if running locally
     try {
       await fetch(CONFIG.apiBase + '/requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-        signal: AbortSignal.timeout(3000),
+        signal: AbortSignal.timeout(2000),
       });
-    } catch (_) {
-      // Server not running - proceed anyway
-    }
+    } catch (_) {}
 
     // Always redirect to WhatsApp
     sendToWhatsApp(data);
@@ -206,6 +207,21 @@ function validateForm() {
   }
 
   return valid;
+}
+
+function saveToLocalStorage(data) {
+  const requests = JSON.parse(localStorage.getItem('directhelp_requests') || '[]');
+  requests.unshift({
+    id: Date.now().toString() + Math.random().toString(36).slice(2, 7),
+    name: data.name,
+    whatsapp: data.whatsapp,
+    email: data.email || '',
+    category: data.category,
+    message: data.message,
+    timestamp: new Date().toISOString(),
+    status: 'pending',
+  });
+  localStorage.setItem('directhelp_requests', JSON.stringify(requests));
 }
 
 function sendToWhatsApp(data) {

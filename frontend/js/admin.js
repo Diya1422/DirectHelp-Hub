@@ -35,29 +35,34 @@ window.addEventListener('scroll', () => {
 async function loadRequests() {
   const loading = document.getElementById('loadingState');
   const container = document.getElementById('tableContainer');
-  const warn = document.getElementById('serverWarn');
 
   loading.style.display = 'block';
   container.style.display = 'none';
-  warn.classList.remove('show');
 
+  // Always load from localStorage first
+  const local = JSON.parse(localStorage.getItem('directhelp_requests') || '[]');
+
+  // Try to also pull from Java server (only works when running locally)
   try {
     const res = await fetch(ADMIN_CONFIG.apiBase + '/requests', {
-      signal: AbortSignal.timeout(4000),
+      signal: AbortSignal.timeout(2000),
     });
-
     if (!res.ok) throw new Error('Server error');
     const data = await res.json();
-    allRequests = data.requests || [];
-    renderRequests(allRequests);
-    updateStats(allRequests);
+    const serverRequests = data.requests || [];
+    // Merge: combine server + local, deduplicate by id
+    const merged = [...serverRequests];
+    local.forEach(r => {
+      if (!merged.find(s => s.id === r.id)) merged.push(r);
+    });
+    allRequests = merged.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
   } catch (_) {
-    warn.classList.add('show');
-    allRequests = [];
-    renderRequests([]);
-    updateStats([]);
+    // Server not available - use localStorage only (normal for deployed site)
+    allRequests = local;
   }
 
+  renderRequests(allRequests);
+  updateStats(allRequests);
   loading.style.display = 'none';
   container.style.display = 'block';
 }
@@ -125,10 +130,17 @@ function closeDeleteModal() {
 
 async function confirmDelete() {
   if (!pendingDeleteId) return;
+
+  // Remove from localStorage
+  const local = JSON.parse(localStorage.getItem('directhelp_requests') || '[]');
+  localStorage.setItem('directhelp_requests',
+    JSON.stringify(local.filter(r => r.id !== pendingDeleteId)));
+
+  // Also try server delete
   try {
     await fetch(`${ADMIN_CONFIG.apiBase}/requests/${pendingDeleteId}`, {
       method: 'DELETE',
-      signal: AbortSignal.timeout(4000),
+      signal: AbortSignal.timeout(2000),
     });
   } catch (_) {}
 
